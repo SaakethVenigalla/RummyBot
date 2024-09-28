@@ -22,7 +22,9 @@ Public static class Deck {
    }
    
    public Card draw() {
-      return deckArray.get(Random.randint(0, deckArray.size() - 1));
+      int c = Random.randint(0, deckArray.size() - 1)
+      deckArray.remove(deck);//we need tocopy the card and remove for this to work right
+      return c;
    }
    
    public void addTo(Card discarded) {
