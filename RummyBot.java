@@ -11,11 +11,33 @@ public class RummyBot{
       hand.get(2).add(new Card(2, 'd'));
       hand.get(3).add(new Card(3, 's'));
       hand.get(4).add(new Card(6, 'c'));
-      System.out.println(decide(new Card(1, 'h')));
+      System.out.println(decide(new Card(3, 'h')));
       System.out.println(hand);
    }
+   public static void add(Card s){
+      int set=-1;
+      int sizeSet = 0;
+      boolean isSet = true;
+      for(int i = 0; i<hand.size(); i++){//sets of same number
+         for(int j = 0; j<hand.get(i).size(); j++){
+            if(!(s.number==hand.get(i).get(j).number)){
+               isSet = false;
+            }
+         }
+         if(isSet&&hand.get(i).size()>sizeSet){
+            set = i;
+         }
+         isSet = true;
+      }
+      if(set==-1){
+         hand.add(new ArrayList<Card>());
+         hand.get(hand.size()-1).add(s);
+      }else{
+         hand.get(set).add(s);
+      }
+   }
    public static Card decide(Card s){
-      //add(s);
+      add(s);
       int ch;
       int check;
       for(int i = 0; i<hand.size(); i++){
@@ -27,6 +49,7 @@ public class RummyBot{
             }
          }
       }
+      System.out.println(hand);
       //this part is the last resort, if it doesn't fit in any set replace it with your highest card
       ArrayList<Integer> ones = new ArrayList<Integer>();
       for(int i = 0; i<hand.size(); i++){
