@@ -3,9 +3,10 @@ import java.util.Random;
 
 Public static class Deck {
    int numberOfDecks;
-   ArrayList<Card> deckArray = new ArrayList<Card>;
+   ArrayList<Card> deckArray = new ArrayList<Card>();
    public Deck(int i) {
-      numberOfDecks = i
+      numberOfDecks = i;
+      initDeck();
    }
    
    //adds a full deck of playing cards to the deck for each numberOfDecks
