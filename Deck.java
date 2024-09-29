@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-Public static class Deck {
+public class Deck {
    int numberOfDecks;
    ArrayList<Card> deckArray = new ArrayList<Card>();
    public Deck(int i) {
@@ -22,14 +22,17 @@ Public static class Deck {
    }
    
    public Card draw() {
-      Card c = Random.randint(0, deckArray.size() - 1)
-      deckArray.remove(deck);
+      Random r = new Random();
+      int x = r.nextInt(deckArray.size());
+      Card c = deckArray.get(x);
+      deckArray.remove(deckArray.get(x));
       return c;
    }
    
    public void addTo(Card discarded) {
       deckArray.add(discarded);
    } 
+   }
      
 
                          
