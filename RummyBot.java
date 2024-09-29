@@ -5,8 +5,8 @@ public class RummyBot{
    int points;
    int aggression;
    boolean isFolded;
+   
    public RummyBot(Deck drawFrom, int aggressionNum) {
-      //Note about this: The code throws errors if you try to compile the RummyBot file on its own (because it doesn't know what hand it) but I think if you compile the GameMaster file which calls this constructor it should work.
       for (int i = 0; i < 13; i++) { 
          hand.add(new ArrayList<Card>());
          hand.get(i).add(drawFrom.draw());
@@ -15,7 +15,16 @@ public class RummyBot{
       aggression = aggressionNum;
       isFolded = false;
    }   
-   public boolean playOrNo(int numDeck){
+   public ArrayList<Card> playerHand(){
+      ArrayList<Card> p = new ArrayList<Card>();
+      for(int i = 0; i<hand.size(); i++){
+         for(int j = 0; j<hand.get(i).size(); j++){
+             p.add(hand.get(i).get(j));
+         }
+      }
+      return p;
+   }
+   public boolean playOrNo(){
       int win = 0;
       for(int i = 1; i<hand.size(); i++){
          if(hand.get(i).size()<3){
