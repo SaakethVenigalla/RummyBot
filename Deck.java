@@ -22,12 +22,14 @@ Public static class Deck {
    }
    
    public Card draw() {
-      int c = Random.randint(0, deckArray.size() - 1)
-      deckArray.remove(deck);//we need tocopy the card and remove for this to work right
+      Card c = Random.randint(0, deckArray.size() - 1)
+      deckArray.remove(deck);
       return c;
    }
    
    public void addTo(Card discarded) {
       deckArray.add(discarded);
    } 
-                              
+     
+
+                         
