@@ -19,8 +19,10 @@ public class RummyBot{
       System.out.println(hand);
    } */
    
+   
    public RummyBot(Deck drawFrom, int aggressionNum) {
-      ArrayList<ArrayList<Card>> hand = new ArrayList<ArrayList<Card>>();
+      //Note about this: The code throws errors if you try to compile the RummyBot file on its own (because it doesn't know what hand it) but I think if you compile the GameMaster file which calls this constructor it should work.
+      ArrayList<ArrayList<Card>> hand = new ArrayList<ArrayList<Card>>(13);
       for (int i = 0; i < 13; i++) { 
          hand.add(new ArrayList<Card>());
          hand.get(i).add(drawFrom.draw());
@@ -104,5 +106,40 @@ public class RummyBot{
       hand.get(i).remove(itwo);
       hand.get(i).add(itwo, s);
       return c;
+   }
+   
+   //checks if a set contains a straight flush. Precondition: target.size() is 3 or more
+   public static boolean straightCheck(ArrayList<Card> target) {
+      for (int i = 1; i < target.size(); i++) {
+         if (target.get(i).suit != target.get(i - 1).suit){
+            return false;
+         } else if (!(/* target.get(i - 1) is numerically adjacent to target.get(i) */(target.get(i - 1).number == target.get(i).number + 1 || target.get(i - 1).number == target.get(i).number - 1) && /* there is no other instance of target.get(i - 1) */(target.indexOf(target.get(i - 1)) == i - 1 && target.lastIndexOf(target.get(i - 1)) == i - 1))) {
+            return false;
+         }
+      }
+      return true;
+   }
+   
+   //checks if a set contains cards of all the same number
+   public static boolean kindCheck(ArrayList<Card> target) {
+      for (int i = 1; i < target.size(); i++) {
+         if (target.get(i).number != target.get(i - 1).number)
+            return false;
+      }
+      return true;
+      
+   }
+   
+   
+   public static boolean hasWon() {
+      for (int i = 0; i < hand.size(); i++) {
+         if (straightCheck(hand.get(i)) == false && kindCheck(hand.get(i)) == false) {
+            return false;
+         } else {
+            return true;
+         }
+      }
    }  
+   
+   
 }
